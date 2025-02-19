@@ -7,11 +7,12 @@
 </head>
 <body>
     <nav>
-        <a href='/'>Home</a>
-        <a href='/about'>About</a>
-        <a href='/contact'>Contact Us</a>
+        <x-nav-link href='/'>Home</x-nav-link>
+        <x-nav-link href='/about' style='color: green'>About</x-nav-link>
+        <x-nav-link href='/contact'>Contact</x-nav-link>
     </nav>
 
-    <?= $slot ?>
+    {{ $slot }}
+
 </body>
 </html>
