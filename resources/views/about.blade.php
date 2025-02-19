@@ -1,3 +1,7 @@
 <x-layout>
-    <h1>Welcome to About Page</h1>
+    <x-slot:heading>
+        About Page
+    </x-slot:heading>
+    Welcome to About Page.
+    About Us
 </x-layout>

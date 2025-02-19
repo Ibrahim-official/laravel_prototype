@@ -1,3 +1,7 @@
 <x-layout>
-    <h1>Welcome to Contact Page</h1>
+    <x-slot:heading>
+        Contact Page
+    </x-slot:heading>
+    Welcome to Contact Page.
+    Contact Us
 </x-layout>
