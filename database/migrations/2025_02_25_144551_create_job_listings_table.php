@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('job_listings', function (Blueprint $table) {
             $table->id();
+            // foreign_id called employer_id
+            //$table->unsignedBigInteger('employer_id');   // Whenever ypou call this id method within a mirgration, it creates big integer that automatically increases in the column
+            $table->foreignIdFor(\App\Models\Employer::class);
             $table->string('title');
             $table->string('salary');
             $table->timestamps();
