@@ -2,15 +2,17 @@
     <x-slot:heading>
         Jobs Listings
     </x-slot:heading>
-    Welcome to Jobs Page. Here's the job stuff...: <br><br>
 
-
-@foreach ($jobs as $job)
-    <li>    
-        <a href="/job/{{ $job['id'] }}" class="hover:text-blue-500 hover:underline">
-            <b>{{ $job['title'] }}:</b> Pays {{ $job['salary'] }} per year. 
+<div class="space-y-4">
+    @foreach ($jobs as $job)
+        <a href="/job/{{ $job['id'] }}" class="block px-4 py-6 border border-gray-200 rounded-lg">
+        <div class="font-bold text-blue-500">
+                {{ $job->employer->name }}
+        </div>    
+        <div>
+                <b>{{ $job['title'] }}:</b> Pays {{ $job['salary'] }} per year.
+        </div>
         </a>
-    </li>
-@endforeach
-
+    @endforeach
+</div>
 </x-layout>

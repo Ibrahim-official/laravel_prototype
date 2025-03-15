@@ -11,7 +11,7 @@ Route::get('/', function () {
 
 Route::get('/jobs', function () {
     return view('jobs', [
-        'jobs' => Job::all()
+        'jobs' => Job::with('employer')->get()         // We went from LazyLoading -> Eager_Loading
     ]);
 });
 
