@@ -10,8 +10,10 @@ Route::get('/', function () {
 });
 
 Route::get('/jobs', function () {
+    $jobs = Job::with('employer')->simplePaginate(3);         // We went from LazyLoading -> Eager_Loading
+
     return view('jobs', [
-        'jobs' => Job::with('employer')->get()         // We went from LazyLoading -> Eager_Loading
+        'jobs' => $jobs
     ]);
 });
 
