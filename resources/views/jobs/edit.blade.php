@@ -1,13 +1,10 @@
 <x-layout>
     <x-slot:heading>
-        Create Job
+        Edit Job: {{ $job->title }}
     </x-slot:heading>
-    <form method="POST" action="/jobs">
+    <form method="POST" action="/job/{{ $job->id }}">
         @csrf
-        <div class="space-y-12">
-            <div class="border-b border-gray-900/10 pb-12">
-            <h2 class="text-base/7 font-semibold text-gray-900">Create a new Job</h2>
-            <p class="mt-1 text-sm/6 text-gray-600">We just need a handful of details from you.</p>
+        @method('PATCH')
 
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-4">
@@ -17,8 +14,9 @@
                             <input type="text" 
                                     name="title" 
                                     id="title" 
-                                    class="block min-w-0 grow py-1.5 px-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"
-                                    placeholder="Full-Stack Dev">
+                                    class="block min-w-0 grow py-1.5 px-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" 
+                                    placeholder="Full-Stack Dev"
+                                    value="{{ $job->title }}">
                         </div>
                     </div>
                             @error('title')
@@ -38,7 +36,8 @@
                                     name="salary" 
                                     id="salary" 
                                     class="block min-w-0 grow py-1.5 px-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" 
-                                    placeholder="$50,000 Per Year">
+                                    placeholder="$50,000 Per Year"
+                                    value="{{ $job->salary }}">
                         </div>
                     </div>
                             @error('salary')
@@ -49,10 +48,29 @@
                 </div>
             </div>
 
-        <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
-            <button type="submit" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+        <div class="mt-6 flex items-center justify-between gap-x-6">
+            
+            <div class="flex items-center">
+                <button form="delete-form" class="text-red-500 text-sm font-bold border rounded-md hover:border-red-500 px-3 py-2 transition duration-700">
+                    Delete
+                </button>
+            </div>
+
+            <div class="flex items-center gap-x-6">   
+                <a href="/jobs" class="text-sm/6 font-semibold text-gray-900">Cancel</a>
+
+                <div>
+                    <button type="submit"
+                            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        >Update</button>
+                </div>
+            </div>
         </div>
+    </form>
+
+    <form method="POST" action="/job/{{ $job->id }}" id="delete-form" class="hidden">
+        @csrf 
+        @method('DELETE')
     </form>
     
 </x-layout>
