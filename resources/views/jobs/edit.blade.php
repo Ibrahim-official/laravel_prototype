@@ -15,8 +15,9 @@
                                     name="title" 
                                     id="title" 
                                     class="block min-w-0 grow py-1.5 px-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" 
-                                    placeholder="Full-Stack Dev"
-                                    value="{{ $job->title }}">
+                                    placeholder="jhjh"
+                                    value="{{ $job->title }}"
+                                    required>
                         </div>
                     </div>
                             @error('title')
@@ -37,7 +38,8 @@
                                     id="salary" 
                                     class="block min-w-0 grow py-1.5 px-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" 
                                     placeholder="$50,000 Per Year"
-                                    value="{{ $job->salary }}">
+                                    value="{{ $job->salary }}"
+                                    required>
                         </div>
                     </div>
                             @error('salary')
@@ -72,5 +74,5 @@
         @csrf 
         @method('DELETE')
     </form>
-    
+
 </x-layout>
