@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Job;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class JobController extends Controller
 {
-    public function index () ///////////////////////////////////////////////////////////////////////////
+    public function index () //-------------------------------------------------------------------------------------------
     {
         $jobs = Job::with('employer')->latest()->simplePaginate(3);    // We went from LazyLoading -> Eager_Loading
 
@@ -17,12 +19,12 @@ class JobController extends Controller
         ]);
     }
     
-    public function create () ///////////////////////////////////////////////////////////////////////////
+    public function create () //-------------------------------------------------------------------------------------------
     {
         return view('jobs.create');
     }
     
-    public function store () ///////////////////////////////////////////////////////////////////////////
+    public function store () //-------------------------------------------------------------------------------------------
     {
         request()->validate([
             'title' => ['required', 'min:3'],
@@ -37,24 +39,23 @@ class JobController extends Controller
         return redirect('/jobs');
     }
     
-    public function show (Job $job) ///////////////////////////////////////////////////////////////////////////
+    public function show (Job $job) //-------------------------------------------------------------------------------------------
     {
         return view('jobs.show', ['job' => $job]);
     }
     
-    public function edit (Job $job) ///////////////////////////////////////////////////////////////////////////
+    public function edit (Job $job) //-------------------------------------------------------------------------------------------
     {
-        if (Auth::guest()) {    // Opposite of Auth::user  OR  Auth::check
-            return redirect('/login');
-        }
+        // Gate definition moved to AppServiceProvider.php file for effective optimization
+        // REMOVED the if condition logic that confirms tht u r signed in becomes irrelevant once u use GATE Logic
 
-        if ($job->employer->user->isNot(Auth::user())) {    // If the person who created this job is not the person who is currently signed in, then you don't have authorization
-            abort(403);
-        }
+        // Now we can refernce/call that gate by:
+        Gate::authorize('edit-job', $job);
+
         return view('jobs.edit', ['job' => $job]);
     }
     
-    public function update (Job $job) ///////////////////////////////////////////////////////////////////////////
+    public function update (Job $job) //-------------------------------------------------------------------------------------------
     {
     // authorize
     
@@ -71,7 +72,7 @@ class JobController extends Controller
     return redirect('/jobs/'. $job->id );  
     }
     
-    public function destroy (Job $job) ///////////////////////////////////////////////////////////////////////////
+    public function destroy (Job $job) //-------------------------------------------------------------------------------------------
     {
     // authorize
     $job->delete();                   // delete the job
