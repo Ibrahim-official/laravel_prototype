@@ -63,7 +63,7 @@ class JobController extends Controller
         
     $job->update([                                            // update & presist
         'title' => request('title'),
-        'salary' => "$".request('salary')." USD",
+        'salary' => request('salary'),
     ]);
 
     return redirect('/jobs/'. $job->id );  

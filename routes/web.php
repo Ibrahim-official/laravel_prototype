@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home');
 Route::view('/contact', 'contact');
 
-Route::resource('/jobs', JobController::class);
+Route::resource('/jobs', JobController::class); // index, create, store,- show, edit, update,- destroy
 
 // Auth
 Route::get('/register', [RegisteredUserController::class, 'create']);
