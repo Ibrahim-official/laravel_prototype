@@ -29,12 +29,5 @@ class AppServiceProvider extends ServiceProvider
 
         // Paginator::useBootstrapFive();
 
-
-        // Gate facades is a barrier tht conditionally allows entry if meet a certain criteria
-        Gate::define('edit-job', function (User $user, Job $job) { 
-            // within here a Boolean should be reurned that indicates ~Whether the gate should open (whether this user is authorized to edit that job)
-            return $job->employer->user->is($user);   // If the person who created this job is not the person who is currently signed in, then you don't have authorization
-            
-        });
     }
 }
