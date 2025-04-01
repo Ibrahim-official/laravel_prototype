@@ -43,12 +43,6 @@ class JobController extends Controller
     
     public function edit (Job $job) //-------------------------------------------------------------------------------------------
     {
-        // Gate definition moved to AppServiceProvider.php file for effective optimization
-        // REMOVED the if condition logic that confirms tht u r signed in becomes irrelevant once u use GATE Logic
-
-        // Now we can refernce/call that gate by:
-        Gate::authorize('edit-job', $job);
-
         return view('jobs.edit', ['job' => $job]);
     }
     
