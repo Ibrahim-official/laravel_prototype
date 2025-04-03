@@ -28,6 +28,8 @@ class JobPosted extends Mailable
     {
         return new Envelope(
             subject: 'Job Posted',
+            from: 'admin@connectify.com', 
+            replyTo: 'hr@connectify.com'
         );
     }
 
