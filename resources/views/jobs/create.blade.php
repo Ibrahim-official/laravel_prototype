@@ -22,7 +22,7 @@
             </x-form-field>
     
             <div class="mt-6 flex items-center justify-end gap-x-6">
-                <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
+                <a href="/jobs" class="text-sm/6 font-semibold text-gray-900">Cancel</a>
                 <x-form-button>Save</x-form-button>
             </div>
         </form>
