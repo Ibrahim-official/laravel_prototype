@@ -3,13 +3,14 @@
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Jobs\TranslateJob;
+use App\Models\Job;
 use Illuminate\Support\Facades\Route;
 
 Route::get('test', function () {
 
-    dispatch(function(){                    // dispatch helper fn also called queued closure
-        logger('Hello from the queue');     // logger fn is used to log to a file
-    })->delay(5);                           // delays by 5 seconds
+    $job = Job::first();
+    TranslateJob::dispatch($job);
 
     return 'Test Done';
 });
